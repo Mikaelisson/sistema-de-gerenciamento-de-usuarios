@@ -23,12 +23,9 @@ const register = async (req, res) => {
   }
 };
 
-// 630803ba1530109d318ada36
 const update = async (req, res) => {
   let id = req.params.id;
-  if (!id) {
-    id = req.body.id;
-  }
+  if (!id) id = req.body.id;
 
   let doc = {};
   doc.name = req.body.name;
@@ -40,7 +37,20 @@ const update = async (req, res) => {
     res.redirect("/");
   } catch (error) {
     res.send("Error ao atualizar usuário" + error);
-}
+  }
 };
 
-module.exports = { dataSearch, register, update };
+const deleteUser = async (req, res) => {
+  let id = req.params.id;
+  if (!id) id = req.body.id;
+
+  try {
+    let doc = await User.findByIdAndDelete(id);
+    if (doc) res.redirect("/");
+    else error;
+  } catch (error) {
+    res.send("Error ao deletar usuário" + error);
+  }
+};
+
+module.exports = { dataSearch, register, update, deleteUser };
