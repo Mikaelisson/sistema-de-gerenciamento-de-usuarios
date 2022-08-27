@@ -5,7 +5,7 @@ const dataSearch = async (req, res) => {
     let doc = await User.find({});
     res.render("index", { doc });
   } catch (error) {
-    res.send("Error na página inicial" + error);
+    res.status(404).send("Error na página inicial" + error);
   }
 };
 
@@ -19,7 +19,7 @@ const register = async (req, res) => {
     await doc.save();
     res.redirect("/");
   } catch (error) {
-    res.send("Error ao registrar usuário" + error);
+    res.status(404).send("Error ao registrar usuário" + error);
   }
 };
 
@@ -36,7 +36,7 @@ const update = async (req, res) => {
     await User.findByIdAndUpdate(id, doc);
     res.redirect("/");
   } catch (error) {
-    res.send("Error ao atualizar usuário" + error);
+    res.status(404).send("Error ao atualizar usuário" + error);
   }
 };
 
@@ -45,11 +45,16 @@ const deleteUser = async (req, res) => {
   if (!id) id = req.body.id;
 
   try {
-    let doc = await User.findByIdAndDelete(id);
-    if (doc) res.redirect("/");
-    else error;
+    let doc = await User.findById(id);
+
+    if (doc) {
+      await User.findByIdAndDelete(id);
+      res.send(id);
+    } else {
+      console.log("Usuário não existe", error.message);
+    }
   } catch (error) {
-    res.send("Error ao deletar usuário" + error);
+    res.status(404).send(`Error ao deletar usuário ${error.message}`);
   }
 };
 

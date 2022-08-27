@@ -4,8 +4,18 @@ const controller = require("../controllers/controller");
 
 router.get("/", controller.dataSearch);
 
-router.post("/register", controller.register);
-router.post("/update/:id", controller.update);
-router.post("/delete/:id", controller.deleteUser);
+router.post(
+  "/register",
+  express.urlencoded({ extended: true }),
+  controller.register
+);
+router.post(
+  "/update/:id",
+  express.urlencoded({ extended: true }),
+  controller.update
+);
+
+router.delete("/:id", controller.deleteUser);
+router.delete("/", express.json(), controller.deleteUser);
 
 module.exports = router;
