@@ -1,5 +1,6 @@
 const User = require("../models/User");
 
+//buscar dados de todos usuários
 const dataSearch = async (req, res) => {
   try {
     let doc = await User.find({});
@@ -9,10 +10,19 @@ const dataSearch = async (req, res) => {
   }
 };
 
+const getRegister = async (req, res) => {
+  try {
+    res.render("register");
+  } catch (error) {
+    res.status(404).send("Error ao redirecionar no registro de usuário");
+  }
+};
+
+//registrar novo usuário
 const register = async (req, res) => {
   let doc = new User({
     name: req.body.name,
-    phone: req.body.phone,
+    phone: parseInt(req.body.phone),
     email: req.body.email,
   });
   try {
@@ -23,6 +33,19 @@ const register = async (req, res) => {
   }
 };
 
+//recupera dados para edição
+const getUpdate = async (req, res) => {
+  let id = req.params.id;
+  if (!id) id = req.body.id;
+  try {
+    const doc = await User.findById(id);
+    res.render("edit", { doc });
+  } catch (error) {
+    res.status(404).send("Error ao editar usuário");
+  }
+};
+
+//editar informações de usuário
 const update = async (req, res) => {
   let id = req.params.id;
   if (!id) id = req.body.id;
@@ -40,6 +63,7 @@ const update = async (req, res) => {
   }
 };
 
+//deletar usuário
 const deleteUser = async (req, res) => {
   let id = req.params.id;
   if (!id) id = req.body.id;
@@ -58,4 +82,11 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { dataSearch, register, update, deleteUser };
+module.exports = {
+  dataSearch,
+  register,
+  update,
+  deleteUser,
+  getUpdate,
+  getRegister,
+};

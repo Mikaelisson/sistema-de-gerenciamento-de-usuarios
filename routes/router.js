@@ -4,16 +4,8 @@ const controller = require("../controllers/controller");
 const User = require("../models/User");
 
 router.get("/", controller.dataSearch);
-router.get("/edit/:id", async (req, res) => {
-  let id = req.params.id;
-  if (!id) id = req.body.id;
-  try {
-    const doc = await User.findById(id);
-    res.render("edit", { doc });
-  } catch (error) {
-    res.status(404).send("Error ao editar usuário");
-  }
-});
+router.get("/register", controller.getRegister);
+router.get("/edit/:id", controller.getUpdate);
 
 router.post(
   "/register",

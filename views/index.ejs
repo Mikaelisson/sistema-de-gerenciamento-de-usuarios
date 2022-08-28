@@ -8,20 +8,21 @@
     <title>CRUD</title>
 </head>
 <body class="bg-dark text-white">
-    <header class="bg-warning p-2 text-dark text-center">
-            <h1>Sistema</h1>
-    </header>
+
+    <%- include('partials/header')%>
+
     <main class="container">
 
         <%doc.forEach((i)=>{%>
         <form>
-            <div id="<%i.id%>" class="card text-bg-dark">
-                <p><%=i.name%></p>
-                <p><%=i.phone%></p>
-                <p><%=i.email%></p>
-                <div>
-                    <a href="/edit/<%=i.id%>" class="btn btn-secondary">editar</a>
-                    <button onclick="deleteUser('<%=i.id%>')" class="btn btn-danger">excluir</button>
+            <div id="<%i.id%>" class="text-bg-dark border border-warning p-2 mt-2 rounded">
+                <p>Nome: <%=i.name%></p>
+                <p>Telefone: <%=i.phone%></p>
+                <p>Email: <%=i.email%></p>
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="" class="btn btn-info">Ver mais</a>
+                    <a href="/edit/<%=i.id%>" class="btn btn-secondary">Editar</a>
+                    <button onclick="deleteUser('<%=i.id%>')" class="btn btn-danger">Excluir</button>
                 </div>
             </div>
         </form>
