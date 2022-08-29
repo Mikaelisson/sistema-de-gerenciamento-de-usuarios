@@ -15,15 +15,36 @@
 
         <%doc.forEach((i)=>{%>
         <form method="POST" action="/<%=i.id%>?_method=DELETE">
-            <div id="<%=i.id%>" class="text-bg-dark border border-warning p-2 mt-2 rounded">
-                <p>Nome: <%=i.name%></p>
-                <p>Cargo: <%=i.office%></p>
-                <p>Telefone: <%=i.phone%></p>
-                <p>Email: <%=i.email%></p>
-                <div class="d-flex justify-content-end gap-2">
-                    <a href="/view/<%=i.id%>" class="btn btn-info">Ver mais</a>
-                    <a href="/edit/<%=i.id%>" class="btn btn-secondary">Editar</a>
-                    <button type="submit" class="btn btn-danger">Excluir</button>
+            <div id="<%=i.id%>" class="text-bg-dark border border-warning p-3 mt-4 rounded">
+
+                <div class="input-group mb-3 ">
+                    <span class="input-group-text" id="basic-addon1">Nome</span>
+                    <input type="text" class="form-control" aria-describedby="basic-addon1" value="<%=i.name%>" disabled>
+                </div>
+                <div class="d-flex gap-2">
+    
+                    <div class="input-group mb-3 w-50">
+                        <span class="input-group-text" id="basic-addon1">Cargo</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1" value="<%=i.office%>" disabled>
+                    </div>
+    
+                    <div class="input-group mb-3 w-50">
+                        <span class="input-group-text" id="basic-addon1">Telefone</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1" value="<%=i.phone%>" disabled>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Email</span>
+                    <input type="text" class="form-control" aria-describedby="basic-addon1" value="<%=i.email%>" disabled>
+                </div>
+
+                <div class="d-flex justify-content-between gap-2">
+                    <a href="/view/<%=i.id%>" class="btn btn-info w-75">Ver mais</a>
+                    <!-- <div> -->
+                        <a href="/edit/<%=i.id%>" class="btn btn-secondary w-25">Editar</a>
+                        <button type="submit" class="btn btn-danger w-25">Excluir</button>
+                    <!-- </div> -->
                 </div>
             </div>
         </form>

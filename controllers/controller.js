@@ -4,6 +4,7 @@ const User = require("../models/User");
 const dataSearch = async (req, res) => {
   try {
     const doc = await User.find({});
+    doc.reverse();
     res.render("index", { doc });
   } catch (error) {
     res.status(404).send("Error na página inicial" + error);
@@ -63,10 +64,22 @@ const update = async (req, res) => {
   const doc = req.body;
 
   try {
-    await User.findByIdAndUpdate(id, doc);
-    res.redirect("/");
+    const user = await User.findById(id);
+
+    if (
+      user.name === req.body.name &&
+      user.phone === req.body.phone &&
+      user.email === req.body.email &&
+      user.office === req.body.office
+    ) {
+      const doc = "Nada foi alterado, verifique os dados e tente novamente.";
+      res.render("error", { doc, id });
+    } else {
+      await User.findByIdAndUpdate(id, doc);
+      res.redirect("/");
+    }
   } catch (error) {
-    res.status(404).send("Error ao atualizar usuário" + error);
+    res.status(404).send("Error ao atualizar usuário");
   }
 };
 
@@ -80,7 +93,7 @@ const deleteUser = async (req, res) => {
 
     if (docToDelete) {
       await User.findByIdAndDelete(id);
-      res.redirect("/")
+      res.redirect("/");
     } else {
       console.log("Usuário não existe", error.message);
     }

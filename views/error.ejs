@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <title>Error</title>
+</head>
+<body>
+    <%- include('partials/header')%>
+    <div class="d-flex flex-column align-items-center justify-content-center my-2">
+        <p class="fw-bold fs-1"><%=doc%></p>
+        <a href="/edit/<%=id%>" class="btn btn-info">Voltar</a>
+    </div>
+</body>
+</html>
