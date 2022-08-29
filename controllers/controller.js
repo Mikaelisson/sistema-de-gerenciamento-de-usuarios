@@ -3,13 +3,27 @@ const User = require("../models/User");
 //buscar dados de todos usuários
 const dataSearch = async (req, res) => {
   try {
-    let doc = await User.find({});
+    const doc = await User.find({});
     res.render("index", { doc });
   } catch (error) {
     res.status(404).send("Error na página inicial" + error);
   }
 };
 
+//apresenta todas informações cadastradas do usuário
+const viewMore = async (req, res) => {
+  let id = req.params.id;
+  if (!id) id = req.body.id;
+
+  try {
+    const doc = await User.findById(id);
+    res.render("view", { doc });
+  } catch (error) {
+    res.status(404).send("Error na página de view");
+  }
+};
+
+//aprenseta pagina de regirar usuario
 const getRegister = async (req, res) => {
   try {
     res.render("register");
@@ -20,11 +34,7 @@ const getRegister = async (req, res) => {
 
 //registrar novo usuário
 const register = async (req, res) => {
-  let doc = new User({
-    name: req.body.name,
-    phone: parseInt(req.body.phone),
-    email: req.body.email,
-  });
+  const doc = new User(req.body);
   try {
     await doc.save();
     res.redirect("/");
@@ -50,10 +60,7 @@ const update = async (req, res) => {
   let id = req.params.id;
   if (!id) id = req.body.id;
 
-  let doc = {};
-  doc.name = req.body.name;
-  doc.phone = req.body.phone;
-  doc.email = req.body.email;
+  const doc = req.body;
 
   try {
     await User.findByIdAndUpdate(id, doc);
@@ -69,11 +76,11 @@ const deleteUser = async (req, res) => {
   if (!id) id = req.body.id;
 
   try {
-    let doc = await User.findById(id);
+    const docToDelete = await User.findById(id);
 
-    if (doc) {
+    if (docToDelete) {
       await User.findByIdAndDelete(id);
-      res.send(id);
+      res.redirect("/")
     } else {
       console.log("Usuário não existe", error.message);
     }
@@ -89,4 +96,5 @@ module.exports = {
   deleteUser,
   getUpdate,
   getRegister,
+  viewMore,
 };

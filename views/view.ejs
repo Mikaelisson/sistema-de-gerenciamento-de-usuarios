@@ -13,21 +13,18 @@
 
     <main class="container">
 
-        <%doc.forEach((i)=>{%>
-        <form method="POST" action="/<%=i.id%>?_method=DELETE">
-            <div id="<%=i.id%>" class="text-bg-dark border border-warning p-2 mt-2 rounded">
-                <p>Nome: <%=i.name%></p>
-                <p>Cargo: <%=i.office%></p>
-                <p>Telefone: <%=i.phone%></p>
-                <p>Email: <%=i.email%></p>
+        <form method="POST" action="/<%=doc.id%>?_method=DELETE">
+            <div id="<%doc.id%>" class="container mt-2 p-2 rounded border border-warning">
+                <p>Nome: <%=doc.name%></p>
+                <p>Cargo: <%=doc.office%></p>
+                <p>Telefone: <%=doc.phone%></p>
+                <p>Email: <%=doc.email%></p>
                 <div class="d-flex justify-content-end gap-2">
-                    <a href="/view/<%=i.id%>" class="btn btn-info">Ver mais</a>
-                    <a href="/edit/<%=i.id%>" class="btn btn-secondary">Editar</a>
+                    <a href="/edit/<%=doc.id%>" class="btn btn-secondary">Editar</a>
                     <button type="submit" class="btn btn-danger">Excluir</button>
                 </div>
             </div>
         </form>
-        <%})%>
         
 
     </main>

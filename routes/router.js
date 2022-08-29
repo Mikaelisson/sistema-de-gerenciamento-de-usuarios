@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/controller");
-const User = require("../models/User");
+const methodOverride = require("method-override");
+
+router.use(methodOverride("_method"));
 
 router.get("/", controller.dataSearch);
 router.get("/register", controller.getRegister);
 router.get("/edit/:id", controller.getUpdate);
+router.get("/view/:id", controller.viewMore);
 
 router.post(
   "/register",
