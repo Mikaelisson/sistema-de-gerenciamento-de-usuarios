@@ -22,6 +22,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use("/", router);
+app.use("/scripts", express.static(path.join(__dirname, "views/scripts")))
 
 app.listen(PORT, () => {
   console.log(`Server is running port ${PORT}`);
