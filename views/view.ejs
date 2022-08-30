@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    />
     <title>CRUD</title>
-</head>
-<body class="bg-dark text-white">
-
-    <%- include('partials/header')%>
+  </head>
+  <body class="bg-dark text-white">
+    <%- include('partials/header')%> <%- include('partials/config')%>
 
     <main class="container">
-
-        <form method="POST" action="/<%=doc.id%>?_method=DELETE">
-            <div id="<%doc.id%>" class="container mt-2 p-2 rounded border border-warning">
-                <p>Nome: <%=doc.name%></p>
-                <p>Cargo: <%=doc.office%></p>
-                <p>Telefone: <%=doc.phone%></p>
-                <p>Email: <%=doc.email%></p>
-                <div class="d-flex justify-content-end gap-2">
-                    <a href="/edit/<%=doc.id%>" class="btn btn-secondary">Editar</a>
-                    <button type="submit" class="btn btn-danger">Excluir</button>
-                </div>
-            </div>
-        </form>
-        
-
+      <form
+        method="POST"
+        action="/<%=doc.id%>?_method=DELETE"
+        class="mt-2 rounded border border-warning p-0 p-3 rounded text-bg-dark"
+      >
+      <p class="fw-bold fs-1 text-center">Informações detalhadas de usuário</p>
+        <div id="<%doc.id%>">
+          <p>Nome: <%=doc.name%></p>
+          <p>Cargo: <%=doc.office%></p>
+          <p>Telefone: <%=doc.phone%></p>
+          <p>Email: <%=doc.email%></p>
+          <div class="d-flex justify-content-end gap-2">
+            <a href="/edit/<%=doc.id%>" class="btn btn-secondary">Editar</a>
+            <button type="submit" class="btn btn-danger">Excluir</button>
+          </div>
+        </div>
+      </form>
     </main>
-    
-</body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/script.js"></script>
+    <script src="/scripts/theme.js"></script>
+  </body>
 </html>

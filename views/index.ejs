@@ -14,12 +14,14 @@
     <%- include('partials/header')%> <%- include('partials/config')%>
 
     <main class="container">
+      <p class="fw-bold fs-1 text-center">Lista de todos usuários</p>
       <%doc.forEach((i)=>{%>
-      <form method="POST" action="/<%=i.id%>?_method=DELETE">
-        <div
-          id="<%=i.id%>"
-          class="text-bg-dark border border-warning p-3 mt-4 rounded"
-        >
+      <form
+        method="POST"
+        action="/<%=i.id%>?_method=DELETE"
+        class="text-bg-dark border border-warning p-3 mt-4 rounded"
+      >
+        <div id="<%=i.id%>">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Nome</span>
             <input
@@ -79,23 +81,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/scripts/script.js"></script>
-    <!-- <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        let activeConfig = (e) => {
-          e.preventDefault();
-          configContent.classList.toggle("d-flex");
-          configContent.classList.toggle("d-none");
-        };
-
-        let config = document
-          .getElementById("config")
-          .addEventListener("click", activeConfig);
-        let close = document
-          .getElementById("close")
-          .addEventListener("click", activeConfig);
-
-        let configContent = document.getElementById("config-content");
-      });
-    </script> -->
+    <script src="/scripts/theme.js"></script>
   </body>
 </html>

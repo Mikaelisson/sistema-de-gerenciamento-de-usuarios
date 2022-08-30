@@ -1,59 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    />
     <title>CRUD</title>
-</head>
-<body class="bg-dark text-white">
-    
-    <%- include('partials/header')%>
+  </head>
+  <body class="bg-dark text-white">
+    <%- include('partials/header')%> <%- include('partials/config')%>
 
     <main class="container">
+      <form method="post" action="/update/<%=doc.id%>" class="text-bg-dark border border-warning p-3 mt-4 rounded">
+        <p class="fw-bold fs-1 text-center">Editar dados de usuário</p>
+        <div class="mt-2">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Nome</span>
+            <input
+              type="text"
+              class="form-control"
+              aria-describedby="basic-addon1"
+              ,
+              name="name"
+              value="<%=doc.name%>"
+            />
+          </div>
 
-        <form method="post" action="/update/<%=doc.id%>">
-            <div class="mt-2 text-bg-dark">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Cargo</span>
+            <input
+              type="text"
+              class="form-control"
+              aria-describedby="basic-addon1"
+              ,
+              name="office"
+              value="<%=doc.office%>"
+            />
+          </div>
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Nome</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1", name="name" value="<%=doc.name%>">
-                </div>
-                
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Cargo</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1", name="office" value="<%=doc.office%>">
-                </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Email</span>
+            <input
+              type="email"
+              class="form-control"
+              aria-describedby="basic-addon1"
+              ,
+              name="email"
+              value="<%=doc.email%>"
+            />
+          </div>
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Email</span>
-                    <input type="email" class="form-control" aria-describedby="basic-addon1", name="email" value="<%=doc.email%>">
-                </div>
-                
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Telefone</span>
-                    <input type="tel" class="form-control" aria-describedby="basic-addon1", name="phone" value="<%=doc.phone%>">
-                </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Telefone</span>
+            <input
+              type="tel"
+              class="form-control"
+              aria-describedby="basic-addon1"
+              ,
+              name="phone"
+              value="<%=doc.phone%>"
+            />
+          </div>
 
-                <div class="d-flex justify-content-end gap-2">
-                    <a href="/" class="btn btn-danger">Cancelar</a>
-                    <button type="submit" class="btn btn-success">Salvar</button>
-                </div>
-            </div>
-        </form>
-        
-
+          <div class="d-flex justify-content-end gap-2">
+            <a href="/" class="btn btn-danger">Cancelar</a>
+            <button type="submit" class="btn btn-success">Salvar</button>
+          </div>
+        </div>
+      </form>
     </main>
 
-    <script>
-        const deleteUser = (id) => {
-            fetch("/" + id, {method: "DELETE"}).then(res=>{
-                res.text().then(userId=>{
-                    document.getElementById(userId).remove();
-                })
-            })
-        }
-    </script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/script.js"></script>
+    <script src="/scripts/theme.js"></script>
+  </body>
 </html>
