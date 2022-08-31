@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const menu = document.getElementById("menu");
   const containerPrincipal = document.querySelector("body");
   const form = document.querySelectorAll("form");
+  const tagP = document.querySelectorAll("p");
   let SaveTheme = "";
   const SavedTheme = "savedTheme";
 
@@ -11,6 +12,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const themeLightApp = () => {
     menu.classList.toggle("btn-dark");
     menu.classList.toggle("btn-light");
+
+    tagP.forEach((i) => {
+      i.classList.toggle("border-dark");
+      i.classList.toggle("border-warning");
+    });
 
     containerPrincipal.classList.toggle("bg-dark");
     containerPrincipal.classList.toggle("text-white");

@@ -37,6 +37,7 @@ const getRegister = async (req, res) => {
 const register = async (req, res) => {
   const doc = new User(req.body);
   try {
+    console.log(req.body);
     await doc.save();
     res.redirect("/");
   } catch (error) {
@@ -70,7 +71,8 @@ const update = async (req, res) => {
       user.name === req.body.name &&
       user.phone === req.body.phone &&
       user.email === req.body.email &&
-      user.office === req.body.office
+      user.office === req.body.office &&
+      user.permission === req.body.permission
     ) {
       const doc = "Nada foi alterado, verifique os dados e tente novamente.";
       res.render("error", { doc, id });

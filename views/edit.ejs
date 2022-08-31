@@ -64,6 +64,18 @@
               value="<%=doc.phone%>"
             />
           </div>
+          
+          <div class="input-group mb-3">
+            <span class="input-group-text">Alterar tipo de permissão</span>
+            <select class="form-select" name="permission" aria-label="Default select example">
+              <option selected value="<%=doc.permission%>"><%=doc.permission%></option>
+              <%if(doc.permission === "Padrão"){%>
+                <option value="Admin">Admin</option>
+              <%}else{%>
+                <option value="Padrão">Padrão</option>
+              <%}%>
+            </select>
+          </div>
 
           <div class="d-flex justify-content-end gap-2">
             <a href="/" class="btn btn-danger">Cancelar</a>
