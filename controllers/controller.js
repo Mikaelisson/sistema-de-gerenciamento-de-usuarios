@@ -24,7 +24,7 @@ const viewMore = async (req, res) => {
   }
 };
 
-//aprenseta pagina de regirar usuario
+//apresenta pagina de regirar usuario
 const getRegister = async (req, res) => {
   try {
     res.render("register");
@@ -42,6 +42,36 @@ const register = async (req, res) => {
     res.redirect("/");
   } catch (error) {
     res.status(404).send("Error ao registrar usuário" + error);
+  }
+};
+
+//apresenta pagina de login
+const getLogin = async (req, res) => {
+  try {
+    const doc = await User.find({});
+    res.render("login", { doc });
+  } catch (error) {
+    res.status(404).send("Error ao autenticar usuário" + error);
+  }
+};
+
+//autenticar usuário
+const login = async (req, res) => {
+  const user = req.body;
+
+  try {
+    const doc = await User.findOne({
+      name: user.name,
+      password: user.password,
+    });
+
+    if (doc.name === user.name || doc.password === user.password) {
+      res.redirect("/");
+    } else {
+      return error;
+    }
+  } catch (error) {
+    res.status(404).send("Error ao autenticar usuário" + error);
   }
 };
 
@@ -112,4 +142,6 @@ module.exports = {
   getUpdate,
   getRegister,
   viewMore,
+  getLogin,
+  login,
 };

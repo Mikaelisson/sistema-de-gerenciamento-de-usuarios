@@ -7,9 +7,17 @@ router.use(methodOverride("_method"));
 
 router.get("/", controller.dataSearch);
 router.get("/register", controller.getRegister);
+router.get("/login", controller.getLogin);
 router.get("/edit/:id", controller.getUpdate);
 router.get("/view/:id", controller.viewMore);
 router.get("/error", controller.viewMore);
+
+
+router.post(
+  "/login",
+  express.urlencoded({ extended: true }),
+  controller.login
+);
 
 router.post(
   "/register",

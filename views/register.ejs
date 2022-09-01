@@ -72,18 +72,37 @@
               required
             />
           </div>
-          
+
           <div class="input-group mb-3">
             <span class="input-group-text">Selecione tipo de permissão</span>
-            <select class="form-select" name="permission" aria-label="Default select example">
+            <select
+              class="form-select"
+              name="permission"
+              aria-label="Default select example"
+            >
               <option selected value="Padrão">Padrão</option>
               <option value="Admin">Admin</option>
             </select>
           </div>
 
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Senha</span>
+            <input
+              type="password"
+              class="form-control"
+              aria-describedby="basic-addon1"
+              ,
+              name="password"
+              minlength="6"
+              placeholder="Senha deverá conter no mínimo 6 caracters*"
+              required
+            />
+          </div>
+
           <div class="d-flex justify-content-end gap-2">
-            <a href="/" class="btn btn-danger">Cancelar</a>
-            <button type="submit" class="btn btn-success">Salvar</button>
+            <a href="/login" class="btn btn-info w-75">Entrar</a>
+            <a href="/" class="btn btn-danger w-25">Cancelar</a>
+            <button type="submit" class="btn btn-success w-25">Salvar</button>
           </div>
         </div>
       </form>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    />
+    <title>CRUD</title>
+  </head>
+  <body class="bg-dark text-white">
+    <%- include('partials/header')%> <%- include('partials/config')%>
+
+    <main class="container">
+      <p class="fw-bold fs-1 text-center">Login</p>
+      <form
+        method="POST"
+        action="/login"
+        class="text-bg-dark border border-warning p-2 mt-4 rounded"
+      >
+        <div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Usuário</span>
+            <select
+              class="form-select"
+              name="name"
+              aria-label="Default select example"
+            >
+              <option selected value="Padrão">Selecione seu usuário</option>
+              <% doc.forEach(i => { %>
+              <option value="<%=i.name%>"><%=i.name%></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text">Senha</span>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              aria-describedby="basic-addon1"
+              placeholder="Digite sua senha"
+            />
+          </div>
+
+          <div class="d-flex justify-content-between gap-2">
+            <a href="/register" class="btn btn-info w-75">Registrar</a>
+            <a href="/>" class="btn btn-danger w-25">Cancelar</a>
+            <button type="submit" class="btn btn-success w-25">Entrar</button>
+          </div>
+        </div>
+      </form>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/script.js"></script>
+    <script src="/scripts/theme.js"></script>
+  </body>
+</html>
