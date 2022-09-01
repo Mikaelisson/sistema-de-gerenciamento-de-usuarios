@@ -2,7 +2,7 @@
   <!-- logo -->
   <h1><a href="/" class="text-decoration-none text-dark">Sistema</a></h1>
 
-  <div class="d-flex justify-content-end">
+  <div class="d-flex justify-content-end gap-2">
     <!-- menu -->
     <div class="dropdown">
       <button
@@ -15,6 +15,28 @@
         Menu
       </button>
       <ul class="dropdown-menu">
+        <!-- usuario logado -->
+        <% if (sessionLogin) { %>
+        <li class="border-bottom border-warning p-2">
+          <button class="dropdown-item" type="button">
+            <a
+              href="/"
+              class="text-decoration-none text-dark d-flex align-items-center gap-2"
+            >
+              <%- include('authentication')%>
+            </a>
+          </button>
+          <button class="dropdown-item" type="button">
+            <a
+              href="/desconect"
+              class="text-decoration-none text-dark d-flex align-items-center gap-2"
+            >
+              Desconectar
+            </a>
+          </button>
+        </li>
+        <% } %>
+
         <!-- login -->
         <li>
           <button class="dropdown-item" type="button">

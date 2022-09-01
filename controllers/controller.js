@@ -5,7 +5,11 @@ const dataSearch = async (req, res) => {
   try {
     const doc = await User.find({});
     doc.reverse();
-    res.render("index", { doc });
+    const sessionLogin = req.session.login;
+    if (sessionLogin) {
+      console.log("Bem Vindo, " + req.session.login + "!");
+    }
+    res.render("index", { doc, sessionLogin });
   } catch (error) {
     res.status(404).send("Error na página inicial" + error);
   }
@@ -49,7 +53,8 @@ const register = async (req, res) => {
 const getLogin = async (req, res) => {
   try {
     const doc = await User.find({});
-    res.render("login", { doc });
+    const sessionLogin = req.session.login;
+    res.render("login", { doc, sessionLogin });
   } catch (error) {
     res.status(404).send("Error ao autenticar usuário" + error);
   }
@@ -58,7 +63,6 @@ const getLogin = async (req, res) => {
 //autenticar usuário
 const login = async (req, res) => {
   const user = req.body;
-
   try {
     const doc = await User.findOne({
       name: user.name,
@@ -66,10 +70,26 @@ const login = async (req, res) => {
     });
 
     if (doc.name === user.name || doc.password === user.password) {
+      req.session.login = doc.name;
+
       res.redirect("/");
     } else {
       return error;
     }
+  } catch (error) {
+    res.status(404).send("Error ao autenticar usuário" + error);
+  }
+};
+
+//desconectar usuário
+const desconect = async (req, res) => {
+  try {
+    const doc = await User.find({});
+    doc.reverse();
+    let user = req.session.login;
+    const sessionLogin = (req.session.login = null);
+    console.log("Usuário " + user + " desconectou-se");
+    res.render("index", { sessionLogin, doc });
   } catch (error) {
     res.status(404).send("Error ao autenticar usuário" + error);
   }
@@ -144,4 +164,5 @@ module.exports = {
   viewMore,
   getLogin,
   login,
+  desconect,
 };
