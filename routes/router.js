@@ -8,6 +8,8 @@ router.use(methodOverride("_method"));
 router.use(
   session({
     secret: "senhaSecreta",
+    resave: false,
+    saveUninitialized: true,
   })
 );
 

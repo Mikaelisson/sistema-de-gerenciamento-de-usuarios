@@ -61,14 +61,14 @@
 
     <script>
       let user = document.getElementById("user");
-      let input = document.querySelector("input")
+      let input = document.querySelector("input");
       let btn = document.getElementById("btn");
       let form = document.querySelector("form");
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         if (user.value === "Padrão") {
           alert("Usuário não foi definido.");
-        } else if(input.value === ""){
+        } else if (input.value === "") {
           alert("Senha inválida, tente novamente.");
         } else {
           form.submit();

@@ -93,28 +93,23 @@ const register = async (req, res) => {
 
   try {
     if (sessionLogin && typeof sessionLogin === "string") {
-      const adminData = await User.findOne({ name: sessionLogin });
-      const admin = adminData.permission;
-
-      if (admin !== "Admin") {
-        if (
-          req.body.name === "" ||
-          typeof req.body.name !== "string" ||
-          req.body.office === "" ||
-          typeof req.body.office !== "string" ||
-          req.body.email === "" ||
-          typeof req.body.email !== "string" ||
-          req.body.phone === "" ||
-          typeof req.body.phone !== "string" ||
-          req.body.password === "" ||
-          typeof req.body.password !== "string" ||
-          req.body.password.length < 6
-        ) {
-          error;
-        } else {
-          await doc.save();
-          res.redirect("/");
-        }
+      if (
+        req.body.name === "" ||
+        typeof req.body.name !== "string" ||
+        req.body.office === "" ||
+        typeof req.body.office !== "string" ||
+        req.body.email === "" ||
+        typeof req.body.email !== "string" ||
+        req.body.phone === "" ||
+        typeof req.body.phone !== "string" ||
+        req.body.password === "" ||
+        typeof req.body.password !== "string" ||
+        req.body.password.length < 6
+      ) {
+        error;
+      } else {
+        await doc.save();
+        res.redirect("/");
       }
     } else {
       error;
@@ -124,7 +119,7 @@ const register = async (req, res) => {
     const doc = new Error(
       "Error ao registrar usuário. " + errorCredential.message
     );
-    res.status(404).render("error", { doc, redirectUser });
+    res.status(404).render("error", { doc, redirectUser, sessionLogin });
   }
 };
 
@@ -162,7 +157,6 @@ const login = async (req, res) => {
 
     if (doc.name === user.name || doc.password === user.password) {
       req.session.login = doc.name;
-
       res.redirect("/");
     } else {
       errorCredential.message;
