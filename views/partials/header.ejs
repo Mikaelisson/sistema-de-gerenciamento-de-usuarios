@@ -18,22 +18,7 @@
         <!-- usuario logado -->
         <% if (sessionLogin) { %>
         <li class="border-bottom border-warning p-2">
-          <button class="dropdown-item" type="button">
-            <a
-              href="/"
-              class="text-decoration-none text-dark d-flex align-items-center gap-2"
-            >
-              <%- include('authentication')%>
-            </a>
-          </button>
-          <button class="dropdown-item" type="button">
-            <a
-              href="/desconect"
-              class="text-decoration-none text-dark d-flex align-items-center gap-2"
-            >
-              Desconectar
-            </a>
-          </button>
+          <%- include('authentication')%>
         </li>
         <% } %>
 

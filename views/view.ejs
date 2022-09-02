@@ -26,8 +26,10 @@
           <p>Telefone: <%=doc.phone%></p>
           <p>Email: <%=doc.email%></p>
           <div class="d-flex justify-content-end gap-2">
-            <a href="/edit/<%=doc.id%>" class="btn btn-secondary">Editar</a>
-            <button type="submit" class="btn btn-danger">Excluir</button>
+            <% if (admin === "Admin") { %>
+              <a href="/edit/<%=doc.id%>" class="btn btn-secondary">Editar</a>
+              <button type="submit" class="btn btn-danger">Excluir</button>
+            <% } %>
           </div>
         </div>
       </form>

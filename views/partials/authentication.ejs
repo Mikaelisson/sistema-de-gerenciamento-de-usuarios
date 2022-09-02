@@ -1,5 +1,24 @@
-<% if (sessionLogin) { %>
-    <div>
-       Seja Bem Vindo <%=sessionLogin%>!
-    </div>
-<% } %>
+<button class="dropdown-item" type="button">
+  <a
+    href="/"
+    class="text-decoration-none text-dark d-flex align-items-center gap-2"
+  >
+    <span
+      class="bg-success rounded-circle"
+      style="width: 10px; height: 10px; filter: blur(1px)"
+    ></span>
+    Seja Bem Vindo(a) <%=sessionLogin%>!
+  </a>
+</button>
+<button class="dropdown-item" type="button">
+  <a
+    href="/desconect"
+    class="text-decoration-none text-dark d-flex align-items-center gap-2"
+  >
+    <span
+      class="bg-danger rounded-circle"
+      style="width: 10px; height: 10px; filter: blur(1px)"
+    ></span>
+    Desconectar
+  </a>
+</button>

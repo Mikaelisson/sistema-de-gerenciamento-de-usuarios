@@ -24,11 +24,15 @@
           <div class="input-group mb-3">
             <span class="input-group-text">Usuário</span>
             <select
+              id="user"
               class="form-select"
               name="name"
               aria-label="Default select example"
+              required
             >
-              <option selected value="Padrão">Selecione seu usuário</option>
+              <option selected value="Padrão" disabled>
+                Selecione seu usuário
+              </option>
               <% doc.forEach(i => { %>
               <option value="<%=i.name%>"><%=i.name%></option>
               <% }) %>
@@ -43,18 +47,34 @@
               name="password"
               aria-describedby="basic-addon1"
               placeholder="Digite sua senha"
+              required
             />
           </div>
-
           <div class="d-flex justify-content-between gap-2">
             <a href="/register" class="btn btn-info w-75">Registrar</a>
-            <a href="/>" class="btn btn-danger w-25">Cancelar</a>
-            <button type="submit" class="btn btn-success w-25">Entrar</button>
+            <a href="/" class="btn btn-danger w-25">Cancelar</a>
+            <button id="btn" class="btn btn-success w-25">Entrar</button>
           </div>
         </div>
       </form>
     </main>
 
+    <script>
+      let user = document.getElementById("user");
+      let input = document.querySelector("input")
+      let btn = document.getElementById("btn");
+      let form = document.querySelector("form");
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (user.value === "Padrão") {
+          alert("Usuário não foi definido.");
+        } else if(input.value === ""){
+          alert("Senha inválida, tente novamente.");
+        } else {
+          form.submit();
+        }
+      });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/scripts/script.js"></script>
     <script src="/scripts/theme.js"></script>

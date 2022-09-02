@@ -78,10 +78,17 @@
 
           <div class="d-flex justify-content-between gap-2">
             <a href="/view/<%=i.id%>" class="btn btn-info w-75">Ver mais</a>
-            <!-- <div> -->
-            <a href="/edit/<%=i.id%>" class="btn btn-secondary w-25">Editar</a>
-            <button type="submit" class="btn btn-danger w-25">Excluir</button>
-            <!-- </div> -->
+            
+
+
+              <% if (admin === "Admin") { %>
+               
+                <a href="/edit/<%=i.id%>" class="btn btn-secondary w-25">Editar</a>
+                <button type="submit" class="btn btn-danger w-25">Excluir</button>
+              <% } %>
+
+
+              
           </div>
         </div>
       </form>

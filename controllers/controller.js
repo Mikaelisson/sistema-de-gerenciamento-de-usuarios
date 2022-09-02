@@ -2,155 +2,290 @@ const User = require("../models/User");
 
 //buscar dados de todos usuários
 const dataSearch = async (req, res) => {
+  const sessionLogin = req.session.login;
+
   try {
-    const doc = await User.find({});
-    doc.reverse();
-    const sessionLogin = req.session.login;
-    if (sessionLogin) {
-      console.log("Bem Vindo, " + req.session.login + "!");
+    if (sessionLogin && typeof sessionLogin === "string") {
+      const adminData = await User.findOne({ name: sessionLogin });
+      const admin = adminData.permission;
+      const doc = await User.find({});
+      doc.reverse();
+      res.render("index", { doc, sessionLogin, admin });
+    } else {
+      const admin = null;
+      const doc = await User.find({});
+      doc.reverse();
+      res.render("index", { doc, sessionLogin, admin });
     }
-    res.render("index", { doc, sessionLogin });
   } catch (error) {
-    res.status(404).send("Error na página inicial" + error);
+    const redirectUser = "/";
+    const doc = new Error(
+      "Error ao buscar dados, tente novamente ou entre em contato com o suporte." +
+        error
+    );
+    res.status(404).render("error", { doc, sessionLogin, redirectUser });
   }
 };
 
 //apresenta todas informações cadastradas do usuário
 const viewMore = async (req, res) => {
+  const sessionLogin = req.session.login;
+
   let id = req.params.id;
   if (!id) id = req.body.id;
 
   try {
-    const doc = await User.findById(id);
-    res.render("view", { doc });
+    if (sessionLogin && typeof sessionLogin === "string") {
+      const adminData = await User.findOne({ name: sessionLogin });
+      const admin = adminData.permission;
+
+      if (admin !== "Admin") {
+        const admin = null;
+        const doc = await User.findById(id);
+        res.render("view", { doc, sessionLogin, admin });
+      } else {
+        const doc = await User.findById(id);
+        res.render("view", { doc, sessionLogin, admin });
+      }
+    } else {
+      const admin = null;
+      const doc = await User.findById(id);
+      res.render("view", { doc, sessionLogin, admin });
+    }
   } catch (error) {
-    res.status(404).send("Error na página de view");
+    const redirectUser = "/";
+    const doc = new Error("Error ao visualizar usuário, tente novamente.");
+    res.status(404).render("error", { doc, redirectUser });
   }
 };
 
 //apresenta pagina de regirar usuario
 const getRegister = async (req, res) => {
+  const sessionLogin = req.session.login;
   try {
-    res.render("register");
+    if (sessionLogin && typeof sessionLogin === "string") {
+      const adminData = await User.findOne({ name: sessionLogin });
+      const admin = adminData.permission;
+
+      if (admin !== "Admin") {
+        const admin = null;
+        res.render("register", { sessionLogin, admin });
+      } else {
+        res.render("register", { sessionLogin, admin });
+      }
+    } else {
+      res.redirect("/login");
+    }
   } catch (error) {
-    res.status(404).send("Error ao redirecionar no registro de usuário");
+    const redirectUser = "/";
+    const doc = new Error(
+      "Error ao redirecionar para o registro de usuário, tente novamente."
+    );
+    res.status(404).render("error", { doc, redirectUser, sessionLogin });
   }
 };
 
 //registrar novo usuário
 const register = async (req, res) => {
+  const sessionLogin = req.session.login;
+  const errorCredential = new Error("Dados inválidos, tente novamente.");
   const doc = new User(req.body);
+
   try {
-    console.log(req.body);
-    await doc.save();
-    res.redirect("/");
+    if (sessionLogin && typeof sessionLogin === "string") {
+      const adminData = await User.findOne({ name: sessionLogin });
+      const admin = adminData.permission;
+
+      if (admin !== "Admin") {
+        if (
+          req.body.name === "" ||
+          typeof req.body.name !== "string" ||
+          req.body.office === "" ||
+          typeof req.body.office !== "string" ||
+          req.body.email === "" ||
+          typeof req.body.email !== "string" ||
+          req.body.phone === "" ||
+          typeof req.body.phone !== "string" ||
+          req.body.password === "" ||
+          typeof req.body.password !== "string" ||
+          req.body.password.length < 6
+        ) {
+          error;
+        } else {
+          await doc.save();
+          res.redirect("/");
+        }
+      }
+    } else {
+      error;
+    }
   } catch (error) {
-    res.status(404).send("Error ao registrar usuário" + error);
+    const redirectUser = "/register";
+    const doc = new Error(
+      "Error ao registrar usuário. " + errorCredential.message
+    );
+    res.status(404).render("error", { doc, redirectUser });
   }
 };
 
 //apresenta pagina de login
 const getLogin = async (req, res) => {
+  const sessionLogin = req.session.login;
   try {
     const doc = await User.find({});
-    const sessionLogin = req.session.login;
     res.render("login", { doc, sessionLogin });
   } catch (error) {
-    res.status(404).send("Error ao autenticar usuário" + error);
+    const redirectUser = "/";
+    const doc = new Error(
+      "Error ao redirecionar para autenticação de usuário, tente novamente."
+    );
+    res.status(404).render("error", { doc, redirectUser });
   }
 };
 
 //autenticar usuário
 const login = async (req, res) => {
   const user = req.body;
+  const sessionLogin = null;
+  const errorCredential = new Error("Credencias inválidas, tente novamente.");
+
   try {
+    if (!user.name) throw new Error("Usuário não definido.");
+    if (!user.password) throw new Error("Senha inválida, tente novamente.");
+
     const doc = await User.findOne({
       name: user.name,
       password: user.password,
     });
+
+    if (!doc) errorCredential.message;
 
     if (doc.name === user.name || doc.password === user.password) {
       req.session.login = doc.name;
 
       res.redirect("/");
     } else {
-      return error;
+      errorCredential.message;
     }
   } catch (error) {
-    res.status(404).send("Error ao autenticar usuário" + error);
+    const redirectUser = "/login";
+    const doc = new Error("Error ao autenticar usuário.");
+    res.status(404).render("error", { doc, redirectUser });
   }
 };
 
 //desconectar usuário
 const desconect = async (req, res) => {
   try {
-    const doc = await User.find({});
-    doc.reverse();
-    let user = req.session.login;
-    const sessionLogin = (req.session.login = null);
-    console.log("Usuário " + user + " desconectou-se");
-    res.render("index", { sessionLogin, doc });
+    req.session.login = null;
+    res.redirect("/");
   } catch (error) {
-    res.status(404).send("Error ao autenticar usuário" + error);
+    const redirectUser = "/";
+    const doc = new Error("Error ao desconectar usuário, tente novamente.");
+    res.status(404).render("error", { doc, redirectUser });
   }
 };
 
 //recupera dados para edição
 const getUpdate = async (req, res) => {
+  const sessionLogin = req.session.login;
+
   let id = req.params.id;
   if (!id) id = req.body.id;
+
   try {
-    const doc = await User.findById(id);
-    res.render("edit", { doc });
+    if (sessionLogin && typeof sessionLogin === "string") {
+      const adminData = await User.findOne({ name: sessionLogin });
+      const admin = adminData.permission;
+
+      if (admin !== "Admin") {
+        error;
+      } else {
+        const doc = await User.findById(id);
+        res.render("edit", { doc, sessionLogin });
+      }
+    } else {
+      error;
+    }
   } catch (error) {
-    res.status(404).send("Error ao editar usuário");
+    const redirectUser = "/edit/" + id;
+    const doc = new Error("Error ao editar usuário, tente novamente.");
+    res.status(404).render("error", { doc, sessionLogin, redirectUser });
   }
 };
 
 //editar informações de usuário
 const update = async (req, res) => {
+  const sessionLogin = req.session.login;
   let id = req.params.id;
   if (!id) id = req.body.id;
 
   const doc = req.body;
 
   try {
-    const user = await User.findById(id);
+    if (sessionLogin && typeof sessionLogin === "string") {
+      const adminData = await User.findOne({ name: sessionLogin });
+      const admin = adminData.permission;
 
-    if (
-      user.name === req.body.name &&
-      user.phone === req.body.phone &&
-      user.email === req.body.email &&
-      user.office === req.body.office &&
-      user.permission === req.body.permission
-    ) {
-      const doc = "Nada foi alterado, verifique os dados e tente novamente.";
-      res.render("error", { doc, id });
+      if (admin !== "Admin") {
+        error;
+      } else {
+        const user = await User.findById(id);
+
+        if (
+          user.name === req.body.name &&
+          user.phone === req.body.phone &&
+          user.email === req.body.email &&
+          user.office === req.body.office &&
+          user.permission === req.body.permission
+        ) {
+          error;
+        } else {
+          await User.findByIdAndUpdate(id, doc);
+          res.redirect("/");
+        }
+      }
     } else {
-      await User.findByIdAndUpdate(id, doc);
-      res.redirect("/");
+      error;
     }
   } catch (error) {
-    res.status(404).send("Error ao atualizar usuário");
+    const redirectUser = "/edit/" + id;
+    const doc = new Error("Error ao editar usuário, tente novamente.");
+    res.status(404).render("error", { doc, redirectUser, sessionLogin });
   }
 };
 
 //deletar usuário
 const deleteUser = async (req, res) => {
+  const sessionLogin = req.session.login;
   let id = req.params.id;
   if (!id) id = req.body.id;
 
   try {
-    const docToDelete = await User.findById(id);
+    if (sessionLogin && typeof sessionLogin === "string") {
+      const adminData = await User.findOne({ name: sessionLogin });
+      const admin = adminData.permission;
 
-    if (docToDelete) {
-      await User.findByIdAndDelete(id);
-      res.redirect("/");
+      if (admin !== "Admin") {
+        error;
+      } else {
+        const docToDelete = await User.findById(id);
+        if (docToDelete.name === req.session.login) req.session.login = null;
+
+        if (docToDelete) {
+          await User.findByIdAndDelete(id);
+          res.redirect("/");
+        }
+      }
     } else {
-      console.log("Usuário não existe", error.message);
+      error;
     }
   } catch (error) {
-    res.status(404).send(`Error ao deletar usuário ${error.message}`);
+    const redirectUser = "/";
+    const doc = new Error(
+      "Usuário não existe ou já foi deletado, tente novamente."
+    );
+    res.status(404).render("error", { doc, redirectUser, sessionLogin });
   }
 };
 

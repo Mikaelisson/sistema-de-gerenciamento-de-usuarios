@@ -10,8 +10,12 @@
 <body>
     <%- include('partials/header')%>
     <div class="d-flex flex-column align-items-center justify-content-center my-2">
-        <p class="fw-bold fs-1"><%=doc%></p>
-        <a href="/edit/<%=id%>" class="btn btn-info">Voltar</a>
+        <p class="fw-bold fs-1 alert alert-danger"><%=doc.message%></p>
+        <a href="<%=redirectUser%>" class="btn btn-info">Voltar</a>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/script.js"></script>
+    <script src="/scripts/theme.js"></script>
 </body>
 </html>
