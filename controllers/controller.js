@@ -55,7 +55,7 @@ const viewMore = async (req, res) => {
   } catch (error) {
     const redirectUser = "/";
     const doc = new Error("Error ao visualizar usuário, tente novamente.");
-    res.status(404).render("error", { doc, redirectUser });
+    res.status(404).render("error", { doc, redirectUser, sessionLogin });
   }
 };
 
@@ -134,7 +134,7 @@ const getLogin = async (req, res) => {
     const doc = new Error(
       "Error ao redirecionar para autenticação de usuário, tente novamente."
     );
-    res.status(404).render("error", { doc, redirectUser });
+    res.status(404).render("error", { doc, redirectUser, sessionLogin });
   }
 };
 
@@ -164,7 +164,7 @@ const login = async (req, res) => {
   } catch (error) {
     const redirectUser = "/login";
     const doc = new Error("Error ao autenticar usuário.");
-    res.status(404).render("error", { doc, redirectUser });
+    res.status(404).render("error", { doc, redirectUser, sessionLogin });
   }
 };
 
@@ -176,7 +176,7 @@ const desconect = async (req, res) => {
   } catch (error) {
     const redirectUser = "/";
     const doc = new Error("Error ao desconectar usuário, tente novamente.");
-    res.status(404).render("error", { doc, redirectUser });
+    res.status(404).render("error", { doc, redirectUser, sessionStorage });
   }
 };
 
