@@ -10,7 +10,6 @@
 * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
 * [Acesso ao Projeto](#acesso-ao-projeto)
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
-* [Pessoas Contribuidoras](#pessoas-contribuidoras)
 * [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras)
 * [Licença](#licença)
 * [Conclusão](#conclusão)
@@ -32,3 +31,14 @@ Você pode acessar os arquivos do projeto clicando [aqui.](https://sistema-geren
 
 
 # <p name="tecnologias-utilizadas"> :heavy_check_mark: Tecnologias Utilizadas </p>
+* `HTML`
+* `CSS`
+* `Javascript`
+* `MongoDB`
+* `Express.js`
+* `Ejs`
+
+
+# <p name="pessoas-desenvolvedoras"> Autor </p>
+[<img src="https://avatars.githubusercontent.com/Mikaelisson" width="115px"><br><sub>Mikaelisson Gesuino</sub>](https://github.com/Mikaelisson)
+| :---: |
