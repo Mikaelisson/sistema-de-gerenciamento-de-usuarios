@@ -3,10 +3,10 @@
 
 <p> <img src="https://img.shields.io/github/license/Mikaelisson/sistema-de-gerenciamento-de-usuarios"/> </p>
 
+
 # Índice 
 
 * [Descrição do Projeto](#descrição-do-projeto)
-* [Status do Projeto](#status-do-Projeto)
 * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
 * [Acesso ao Projeto](#acesso-ao-projeto)
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
@@ -15,15 +15,20 @@
 * [Licença](#licença)
 * [Conclusão](#conclusão)
 
-<h2>Descrição do Projeto</h2>
 
+# <p name="descrição-do-projeto"> Descrição do Projeto </p>
 <p> Sistema de gerenciamento de usuários podendo atribuir permissões aos indivíduos pertencentes à sua conta, sendo recomendável que você atribua a função de Administrador de Sistema da sua conta a mais de um usuário, para o caso do administrador principal não estar disponível. </p>
 
-<h2> Status do Projeto </h2>
 
-<p> Concluído :white_check_mark: </p>
+# <p name="funcionalidades-e-demonstração-da-aplicação"> :hammer: Funcionalidades do projeto </p>
+* Tutorial de utilização do sistema
+<p align="center"> 
+  <img style="width: 70%;" alt="Tutorial de utilização do sistema" src="./assets/img/apresentacao.gif"/> 
+</p>
 
-# :hammer: Funcionalidades do projeto
+
+# <p name="acesso-ao-projeto"> :file_folder: Acesso ao Projeto </p>
+Você pode acessar os arquivos do projeto clicando [aqui.](https://sistema-gerenciador-usuarios.herokuapp.com)
 
 
-<p align="center"> <img src="https://img.shields.io/github/license/Mikaelisson/sistema-de-gerenciamento-de-usuarios"/> </p>
+# <p name="tecnologias-utilizadas"> :heavy_check_mark: Tecnologias Utilizadas </p>
