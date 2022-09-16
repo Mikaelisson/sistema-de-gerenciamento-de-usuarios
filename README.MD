@@ -25,6 +25,19 @@
   <img style="width: 70%;" alt="Tutorial de utilização do sistema" src="./assets/img/apresentacao.gif"/> 
 </p>
 
+1. Somente usuário autenticados poderão utilizar o sistema, clique no botão e siga os próximos passos.
+2. Selecione seu usuário.
+3. Digite sua senha. 
+4. Confirme clicando em entrar.
+* O sistema irá listar todos os usuário do sistema, suas informações e permissões.
+5. Registrar usuário, somente um administrador poderá registrar um novo usuário*.
+6. Preencha todos os dados de usuário e faça a alteração da permissão.
+7. Clique em salvar.
+* Abaixo se quiser alterar tema (opcional).
+8. Menu.
+9. Configurações.
+10. Poderá escolher entre os temas "Dark" e "Light".
+
 
 # <p name="acesso-ao-projeto"> :file_folder: Acesso ao Projeto </p>
 Você pode acessar os arquivos do projeto clicando [aqui.](https://sistema-gerenciador-usuarios.herokuapp.com)
