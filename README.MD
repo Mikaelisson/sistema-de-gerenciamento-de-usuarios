@@ -12,7 +12,6 @@
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
 * [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras)
 * [Licença](#licença)
-* [Conclusão](#conclusão)
 
 
 # <p name="descrição-do-projeto"> Descrição do Projeto </p>
@@ -55,3 +54,9 @@ Você pode acessar os arquivos do projeto clicando [aqui.](https://sistema-geren
 # <p name="pessoas-desenvolvedoras"> Autor </p>
 [<img src="https://avatars.githubusercontent.com/Mikaelisson" width="115px"><br><sub>Mikaelisson Gesuino</sub>](https://github.com/Mikaelisson)
 | :---: |
+
+# <p name="licença"> Licença </p>
+
+The [MIT License]() (MIT)
+
+Copyright :copyright: Ano - Titulo do Projeto.
