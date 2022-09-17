@@ -3,15 +3,17 @@
 
 <p> <img src="https://img.shields.io/github/license/Mikaelisson/sistema-de-gerenciamento-de-usuarios"/> </p>
 
-
-# Índice 
-
-* [Descrição do Projeto](#descrição-do-projeto)
-* [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
-* [Acesso ao Projeto](#acesso-ao-projeto)
-* [Tecnologias utilizadas](#tecnologias-utilizadas)
-* [Pessoas Desenvolvedoras do Projeto](#pessoas-desenvolvedoras)
-* [Licença](#licença)
+<details>
+  <summary>Índice</summary>
+  <ol>
+    <li><a href="#descrição-do-projeto">Descrição do Projeto</a></li>
+    <li><a href="#funcionalidades-e-demonstração-da-aplicação">Funcionalidades e Demonstração da Aplicação</a></li>
+    <li><a href="#acesso-ao-projeto">Acesso ao Projeto</a></li>
+    <li><a href="#tecnologias-utilizadas">Tecnologias utilizadas</a></li>
+    <li><a href="#pessoas-desenvolvedoras">Pessoas Desenvolvedoras do Projeto</a></li>
+    <li><a href="#licença">Licença</a></li>
+  </ol>
+</details>
 
 
 # <p name="descrição-do-projeto"> Descrição do Projeto </p>
