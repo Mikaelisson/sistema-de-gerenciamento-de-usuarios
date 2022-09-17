@@ -54,12 +54,11 @@ Você pode acessar o projeto clicando [aqui.](https://sistema-gerenciador-usuari
 
 # <p name="tecnologias-utilizadas"> :heavy_check_mark: Tecnologias Utilizadas </p>
 * `HTML`
-* `CSS`
+* `Bootstrap`
 * `Javascript`
 * `MongoDB`
 * `Express.js`
 * `Ejs`
-
 
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
 
