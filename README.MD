@@ -59,6 +59,7 @@ Você pode acessar o projeto clicando [aqui.](https://sistema-gerenciador-usuari
 * `MongoDB`
 * `Express.js`
 * `Ejs`
+* `Criptografia bcryptjs`
 
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
 

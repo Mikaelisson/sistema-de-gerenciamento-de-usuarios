@@ -7,11 +7,12 @@ const dataSearch = async (req, res) => {
 
   try {
     if (sessionLogin && typeof sessionLogin === "string") {
-      const adminData = await User.findOne({ name: sessionLogin });
+      const adminData = await User.findOne({ email: sessionLogin });
       const admin = adminData.permission;
+      const authenticatedUser = adminData.name;
       const doc = await User.find({});
       doc.reverse();
-      res.render("index", { doc, sessionLogin, admin });
+      res.render("index", { doc, sessionLogin, authenticatedUser, admin });
     } else {
       const admin = null;
       const doc = await User.find({});
@@ -24,7 +25,8 @@ const dataSearch = async (req, res) => {
       "Error ao buscar dados, tente novamente ou entre em contato com o suporte." +
         error
     );
-    res.status(404).render("error", { doc, sessionLogin, redirectUser });
+    const admin = req.session.login;
+    res.status(404).render("error", { doc, sessionLogin, redirectUser, admin });
   }
 };
 
@@ -37,21 +39,22 @@ const viewMore = async (req, res) => {
 
   try {
     if (sessionLogin && typeof sessionLogin === "string") {
-      const adminData = await User.findOne({ name: sessionLogin });
+      const adminData = await User.findOne({ email: sessionLogin });
       const admin = adminData.permission;
+      const authenticatedUser = adminData.name;
 
       if (admin !== "admin") {
         const admin = null;
         const doc = await User.findById(id);
-        res.render("view", { doc, sessionLogin, admin });
+        res.render("view", { doc, sessionLogin, authenticatedUser, admin });
       } else {
         const doc = await User.findById(id);
-        res.render("view", { doc, sessionLogin, admin });
+        res.render("view", { doc, sessionLogin, authenticatedUser, admin });
       }
     } else {
       const admin = null;
       const doc = await User.findById(id);
-      res.render("view", { doc, sessionLogin, admin });
+      res.render("view", { doc, sessionLogin, authenticatedUser, admin });
     }
   } catch (error) {
     const redirectUser = "/";
@@ -65,14 +68,15 @@ const getRegister = async (req, res) => {
   const sessionLogin = req.session.login;
   try {
     if (sessionLogin && typeof sessionLogin === "string") {
-      const adminData = await User.findOne({ name: sessionLogin });
+      const adminData = await User.findOne({ email: sessionLogin });
       const admin = adminData.permission;
+      const authenticatedUser = adminData.name;
 
       if (admin !== "admin") {
         const admin = null;
-        res.render("register", { sessionLogin, admin });
+        res.render("register", { sessionLogin, authenticatedUser, admin });
       } else {
-        res.render("register", { sessionLogin, admin });
+        res.render("register", { sessionLogin, authenticatedUser, admin });
       }
     } else {
       res.redirect("/login");
@@ -82,7 +86,9 @@ const getRegister = async (req, res) => {
     const doc = new Error(
       "Error ao redirecionar para o registro de usuário, tente novamente."
     );
-    res.status(404).render("error", { doc, redirectUser, sessionLogin });
+    res
+      .status(404)
+      .render("error", { doc, redirectUser, sessionLogin });
   }
 };
 
@@ -142,15 +148,17 @@ const register = async (req, res) => {
 //apresenta pagina de login
 const getLogin = async (req, res) => {
   const sessionLogin = req.session.login;
+  const admin = null;
   try {
     const doc = await User.find({});
-    res.render("login", { doc, sessionLogin });
+    res.render("login", { doc, sessionLogin, admin });
   } catch (error) {
     const redirectUser = "/";
     const doc = new Error(
       "Error ao redirecionar para autenticação de usuário, tente novamente."
     );
-    res.status(404).render("error", { doc, redirectUser, sessionLogin });
+    const admin = req.session.login;
+    res.status(404).render("error", { doc, redirectUser, sessionLogin, admin });
   }
 };
 
@@ -178,15 +186,16 @@ const login = async (req, res) => {
       throw new Error("Senha inválida, tente novamente.");
 
     if (doc.email === user.email || doc.password === user.password) {
-      req.session.login = doc.name;
+      req.session.login = doc.email;
       res.redirect("/");
     } else {
       errorCredential.message;
     }
   } catch (error) {
     const redirectUser = "/login";
+    const admin = req.session.login;
     const doc = error; //new Error("Error ao autenticar usuário.");
-    res.status(404).render("error", { doc, redirectUser, sessionLogin });
+    res.status(404).render("error", { doc, redirectUser, sessionLogin, admin });
   }
 };
 
@@ -211,14 +220,15 @@ const getUpdate = async (req, res) => {
 
   try {
     if (sessionLogin && typeof sessionLogin === "string") {
-      const adminData = await User.findOne({ name: sessionLogin });
+      const adminData = await User.findOne({ email: sessionLogin });
       const admin = adminData.permission;
+      const authenticatedUser = adminData.name;
 
       if (admin !== "admin") {
         error;
       } else {
         const doc = await User.findById(id);
-        res.render("edit", { doc, sessionLogin });
+        res.render("edit", { doc, sessionLogin, authenticatedUser, admin });
       }
     } else {
       error;
@@ -240,7 +250,7 @@ const update = async (req, res) => {
 
   try {
     if (sessionLogin && typeof sessionLogin === "string") {
-      const adminData = await User.findOne({ name: sessionLogin });
+      const adminData = await User.findOne({ email: sessionLogin });
       const admin = adminData.permission;
 
       if (admin !== "admin") {
@@ -268,7 +278,9 @@ const update = async (req, res) => {
   } catch (error) {
     const redirectUser = "/edit/" + id;
     const doc = new Error("Error ao editar usuário, tente novamente.");
-    res.status(404).render("error", { doc, redirectUser, sessionLogin });
+    const admin = null;
+    const authenticatedUser = null;
+    res.status(404).render("error", { doc, redirectUser, sessionLogin, authenticatedUser, admin });
   }
 };
 
@@ -280,14 +292,15 @@ const deleteUser = async (req, res) => {
 
   try {
     if (sessionLogin && typeof sessionLogin === "string") {
-      const adminData = await User.findOne({ name: sessionLogin });
+      const adminData = await User.findOne({ email: sessionLogin });
       const admin = adminData.permission;
+      const authenticatedUser = adminData.name;
 
       if (admin !== "admin") {
         error;
       } else {
         const docToDelete = await User.findById(id);
-        if (docToDelete.name === req.session.login) req.session.login = null;
+        if (docToDelete.email === req.session.login) req.session.login = null;
 
         if (docToDelete) {
           await User.findByIdAndDelete(id);
