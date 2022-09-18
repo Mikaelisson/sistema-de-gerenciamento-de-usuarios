@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const bcrypt = require("bcryptjs");
 
 //buscar dados de todos usuários
 const dataSearch = async (req, res) => {
@@ -39,7 +40,7 @@ const viewMore = async (req, res) => {
       const adminData = await User.findOne({ name: sessionLogin });
       const admin = adminData.permission;
 
-      if (admin !== "Admin") {
+      if (admin !== "admin") {
         const admin = null;
         const doc = await User.findById(id);
         res.render("view", { doc, sessionLogin, admin });
@@ -59,7 +60,7 @@ const viewMore = async (req, res) => {
   }
 };
 
-//apresenta pagina de regirar usuario
+//apresenta pagina de registrar usuario
 const getRegister = async (req, res) => {
   const sessionLogin = req.session.login;
   try {
@@ -67,7 +68,7 @@ const getRegister = async (req, res) => {
       const adminData = await User.findOne({ name: sessionLogin });
       const admin = adminData.permission;
 
-      if (admin !== "Admin") {
+      if (admin !== "admin") {
         const admin = null;
         res.render("register", { sessionLogin, admin });
       } else {
@@ -87,11 +88,26 @@ const getRegister = async (req, res) => {
 
 //registrar novo usuário
 const register = async (req, res) => {
+  const salt = bcrypt.genSaltSync(10);
+
   const sessionLogin = req.session.login;
   const errorCredential = new Error("Dados inválidos, tente novamente.");
-  const doc = new User(req.body);
 
   try {
+    const checkEmail = await User.findOne({
+      email: req.body.email,
+    });
+    if (checkEmail) return error;
+
+    const doc = await new User({
+      name: req.body.name,
+      phone: req.body.phone,
+      email: req.body.email,
+      office: req.body.office,
+      permission: req.body.permission,
+      password: bcrypt.hashSync(req.body.password, salt),
+    });
+
     if (sessionLogin && typeof sessionLogin === "string") {
       if (
         req.body.name === "" ||
@@ -145,17 +161,23 @@ const login = async (req, res) => {
   const errorCredential = new Error("Credencias inválidas, tente novamente.");
 
   try {
-    if (!user.name) throw new Error("Usuário não definido.");
+    if (!user.email) throw new Error("Usuário não definido.");
     if (!user.password) throw new Error("Senha inválida, tente novamente.");
 
     const doc = await User.findOne({
-      name: user.name,
-      password: user.password,
+      email: user.email,
     });
 
     if (!doc) errorCredential.message;
 
-    if (doc.name === user.name || doc.password === user.password) {
+    const passwordAndUserMatch = bcrypt.compareSync(
+      user.password,
+      doc.password
+    );
+    if (!passwordAndUserMatch)
+      throw new Error("Senha inválida, tente novamente.");
+
+    if (doc.email === user.email || doc.password === user.password) {
       req.session.login = doc.name;
       res.redirect("/");
     } else {
@@ -163,7 +185,7 @@ const login = async (req, res) => {
     }
   } catch (error) {
     const redirectUser = "/login";
-    const doc = new Error("Error ao autenticar usuário.");
+    const doc = error; //new Error("Error ao autenticar usuário.");
     res.status(404).render("error", { doc, redirectUser, sessionLogin });
   }
 };
@@ -192,7 +214,7 @@ const getUpdate = async (req, res) => {
       const adminData = await User.findOne({ name: sessionLogin });
       const admin = adminData.permission;
 
-      if (admin !== "Admin") {
+      if (admin !== "admin") {
         error;
       } else {
         const doc = await User.findById(id);
@@ -221,11 +243,12 @@ const update = async (req, res) => {
       const adminData = await User.findOne({ name: sessionLogin });
       const admin = adminData.permission;
 
-      if (admin !== "Admin") {
+      if (admin !== "admin") {
         error;
       } else {
         const user = await User.findById(id);
 
+        //verificar se o usuário não está salvando os mesmos dados
         if (
           user.name === req.body.name &&
           user.phone === req.body.phone &&
@@ -260,7 +283,7 @@ const deleteUser = async (req, res) => {
       const adminData = await User.findOne({ name: sessionLogin });
       const admin = adminData.permission;
 
-      if (admin !== "Admin") {
+      if (admin !== "admin") {
         error;
       } else {
         const docToDelete = await User.findById(id);

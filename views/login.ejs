@@ -26,15 +26,15 @@
             <select
               id="user"
               class="form-select"
-              name="name"
+              name="email"
               aria-label="Default select example"
               required
             >
-              <option selected value="Padrão" disabled>
+              <option selected value="padrao" disabled>
                 Selecione seu usuário
               </option>
               <% doc.forEach(i => { %>
-              <option value="<%=i.name%>"><%=i.name%></option>
+              <option value="<%=i.email%>"><%=i.email%></option>
               <% }) %>
             </select>
           </div>
@@ -66,10 +66,11 @@
       let form = document.querySelector("form");
       btn.addEventListener("click", (e) => {
         e.preventDefault();
-        if (user.value === "Padrão") {
+        if (user.value === "padrao") {
+          //verificação se usuário não está vazio
           alert("Usuário não foi definido.");
         } else if (input.value === "") {
-          alert("Senha inválida, tente novamente.");
+          alert("Senha inválida, tente novamente."); //verificação se senha não está vazia
         } else {
           form.submit();
         }

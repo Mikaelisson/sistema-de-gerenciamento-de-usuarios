@@ -14,7 +14,11 @@
     <%- include('partials/header')%> <%- include('partials/config')%>
 
     <main class="container">
-      <form method="post" action="/update/<%=doc.id%>" class="text-bg-dark border border-warning p-3 mt-4 rounded">
+      <form
+        method="post"
+        action="/update/<%=doc.id%>"
+        class="text-bg-dark border border-warning p-3 mt-4 rounded"
+      >
         <p class="fw-bold fs-1 text-center">Editar dados de usuário</p>
         <div class="mt-2">
           <div class="input-group mb-3">
@@ -64,15 +68,22 @@
               value="<%=doc.phone%>"
             />
           </div>
-          
+
           <div class="input-group mb-3">
             <span class="input-group-text">Alterar tipo de permissão</span>
-            <select class="form-select" name="permission" aria-label="Default select example">
-              <option selected value="<%=doc.permission%>"><%=doc.permission%></option>
-              <%if(doc.permission === "Padrão"){%>
-                <option value="Admin">Admin</option>
+            <select
+              class="form-select"
+              name="permission"
+              aria-label="Default select example"
+            >
+              <option selected value="<%=doc.permission%>">
+                <%=doc.permission%>
+              </option>
+              <%if(doc.permission === "padrao"){%>
+              <option value="admin">Admin</option>
               <%}else{%>
-                <option value="Padrão">Padrão</option>
+              <option value="padrao">Padrão</option>
+              <option value="estagiario">Estagiário</option>
               <%}%>
             </select>
           </div>

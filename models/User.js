@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
   phone: { type: String, required: true },
   email: { type: String, required: true },
   office: { type: String, required: true },
-  permission: { type: String, default: "Padrão" },
+  permission: { type: String, default: "padrao" },
   date: { type: Date, default: new Date() },
   password: {type: String, required: true}
 });
