@@ -86,9 +86,7 @@ const getRegister = async (req, res) => {
     const doc = new Error(
       "Error ao redirecionar para o registro de usuário, tente novamente."
     );
-    res
-      .status(404)
-      .render("error", { doc, redirectUser, sessionLogin });
+    res.status(404).render("error", { doc, redirectUser, sessionLogin });
   }
 };
 
@@ -105,7 +103,7 @@ const register = async (req, res) => {
     });
     if (checkEmail) return error;
 
-    const doc = await new User({
+    const doc = new User({
       name: req.body.name,
       phone: req.body.phone,
       email: req.body.email,
@@ -141,7 +139,17 @@ const register = async (req, res) => {
     const doc = new Error(
       "Error ao registrar usuário. " + errorCredential.message
     );
-    res.status(404).render("error", { doc, redirectUser, sessionLogin });
+    const authenticatedUser = null;
+    const admin = null;
+    res
+      .status(404)
+      .render("error", {
+        doc,
+        redirectUser,
+        sessionLogin,
+        admin,
+        authenticatedUser,
+      });
   }
 };
 
@@ -149,9 +157,10 @@ const register = async (req, res) => {
 const getLogin = async (req, res) => {
   const sessionLogin = req.session.login;
   const admin = null;
+  const authenticatedUser = null;
   try {
     const doc = await User.find({});
-    res.render("login", { doc, sessionLogin, admin });
+    res.render("login", { doc, sessionLogin, authenticatedUser, admin });
   } catch (error) {
     const redirectUser = "/";
     const doc = new Error(
@@ -194,7 +203,7 @@ const login = async (req, res) => {
   } catch (error) {
     const redirectUser = "/login";
     const admin = req.session.login;
-    const doc = error; //new Error("Error ao autenticar usuário.");
+    const doc = new Error("Error ao autenticar usuário.");
     res.status(404).render("error", { doc, redirectUser, sessionLogin, admin });
   }
 };
@@ -280,7 +289,13 @@ const update = async (req, res) => {
     const doc = new Error("Error ao editar usuário, tente novamente.");
     const admin = null;
     const authenticatedUser = null;
-    res.status(404).render("error", { doc, redirectUser, sessionLogin, authenticatedUser, admin });
+    res.status(404).render("error", {
+      doc,
+      redirectUser,
+      sessionLogin,
+      authenticatedUser,
+      admin,
+    });
   }
 };
 
@@ -294,7 +309,6 @@ const deleteUser = async (req, res) => {
     if (sessionLogin && typeof sessionLogin === "string") {
       const adminData = await User.findOne({ email: sessionLogin });
       const admin = adminData.permission;
-      const authenticatedUser = adminData.name;
 
       if (admin !== "admin") {
         error;
