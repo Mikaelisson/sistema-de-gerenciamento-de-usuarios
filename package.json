@@ -26,5 +26,7 @@
     "url": "https://github.com/Mikaelisson/sistema-de-gerenciamento-de-usuarios/issues"
   },
   "homepage": "https://gerenciamento-de-usuarios.onrender.com",
-  "description": ""
+  "description": "<h1 align=\"center\" name=\"readme-top\"> Sistema de gerenciamento de usuários </h1>",
+  "devDependencies": {},
+  "keywords": []
 }
