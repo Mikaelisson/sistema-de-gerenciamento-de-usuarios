@@ -46,7 +46,7 @@
 
 
 # <p name="acesso-ao-projeto"> :file_folder: Acesso ao Projeto </p>
-Você pode acessar o projeto clicando [aqui.](https://sistema-gerenciador-usuarios.herokuapp.com)
+Você pode acessar o projeto clicando [aqui.](https://gerenciamento-de-usuarios.onrender.com)
 
 
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
