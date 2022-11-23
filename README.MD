@@ -1,6 +1,5 @@
 <h1 align="center" name="readme-top"> Sistema de gerenciamento de usuários </h1>
 
-
 <p> <img src="https://img.shields.io/github/license/Mikaelisson/sistema-de-gerenciamento-de-usuarios"/> </p>
 
 <details>
@@ -15,65 +14,72 @@
   </ol>
 </details>
 
-
 # <p name="descrição-do-projeto"> Descrição do Projeto </p>
+
 <p> Sistema de gerenciamento de usuários podendo atribuir permissões aos indivíduos pertencentes à sua conta, sendo recomendável que você atribua a função de Administrador de Sistema da sua conta a mais de um usuário, para o caso do administrador principal não estar disponível. </p>
 
-
-
-
 # <p name="funcionalidades-e-demonstração-da-aplicação"> :hammer: Funcionalidades do projeto </p>
-* Tutorial de utilização do sistema
+
+- Tutorial de utilização do sistema
 <p align="center"> 
   <img style="width: 70%;" alt="Tutorial de utilização do sistema" src="./assets/img/apresentacao.gif"/> 
 </p>
 
 1. Somente usuário autenticados poderão utilizar o sistema, clique no botão e siga os próximos passos.
 2. Selecione seu usuário.
-3. Digite sua senha. 
+3. Digite sua senha.
 4. Confirme clicando em entrar.
-* O sistema irá listar todos os usuário do sistema, suas informações e permissões.
-5. Registrar usuário, somente um administrador poderá registrar um novo usuário*.
+
+- O sistema irá listar todos os usuário do sistema, suas informações e permissões.
+
+5. Registrar usuário, somente um administrador poderá registrar um novo usuário\*.
 6. Preencha todos os dados de usuário e faça a alteração da permissão.
 7. Clique em salvar.
-* Abaixo se quiser alterar tema (opcional).
+
+- Abaixo se quiser alterar tema (opcional).
+
 8. Menu.
 9. Configurações.
 10. Poderá escolher entre os temas "Dark" e "Light".
 
-
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
-
 
 # <p name="acesso-ao-projeto"> :file_folder: Acesso ao Projeto </p>
+
 Você pode acessar o projeto clicando [aqui.](https://gerenciamento-de-usuarios.onrender.com)
 
-
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
-
 
 # <p name="tecnologias-utilizadas"> :heavy_check_mark: Tecnologias Utilizadas </p>
-* `HTML`
-* `Bootstrap`
-* `Javascript`
-* `MongoDB`
-* `Express.js`
-* `Ejs`
-* `Criptografia bcryptjs`
+
+- `HTML`
+- `Bootstrap`
+- `Javascript`
+- `MongoDB`
+- `Express.js`
+- `Ejs`
+- `Criptografia bcryptjs`
 
 <p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
 
+# <p name="pessoas-desenvolvedoras"> Autores </p>
 
-# <p name="pessoas-desenvolvedoras"> Autor </p>
+<div style="display: flex; gap: 10px; width: 100%; position: relative;">
+
 [<img src="https://avatars.githubusercontent.com/Mikaelisson" width="115px"><br><sub>Mikaelisson Gesuino</sub>](https://github.com/Mikaelisson)
 | :---: |
 
+[<img src="https://avatars.githubusercontent.com/Luisseles" width="115px"><br><sub>Luis Seles</sub>](https://github.com/Luisseles)
+| :---: |
 
-<p align="right">(<a href="#readme-top">Voltar ao topo</a>)</p>
+[<img src="https://avatars.githubusercontent.com/Henrique-Portes" width="115px"><br><sub>Henrique Portes</sub>](https://github.com/Henrique-Portes)
+| :---: |
+
+<p style="position: absolute; right:0; bottom: 0;">(<a href="#readme-top">Voltar ao topo</a>)</p>
+</div>
 
 
 # <p name="licença"> Licença </p>
 
 The [MIT License]() (MIT)
 
-Copyright :copyright: Ano - Titulo do Projeto.
