@@ -75,6 +75,9 @@ Você pode acessar o projeto clicando [aqui.](https://gerenciamento-de-usuarios.
 [<img src="https://avatars.githubusercontent.com/Henrique-Portes" width="115px"><br><sub>Henrique Portes</sub>](https://github.com/Henrique-Portes)
 | :---: |
 
+[<img src="https://avatars.githubusercontent.com/Pzzinho" width="115px"><br><sub>Henrique Portes</sub>](https://github.com/Pzzinho)
+| :---: |
+
 <p style="position: absolute; right:0; bottom: 0;">(<a href="#readme-top">Voltar ao topo</a>)</p>
 </div>
 
